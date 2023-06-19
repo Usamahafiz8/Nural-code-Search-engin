@@ -2,20 +2,24 @@ import React from "react";
 import "./App.css";
 import { CopyRightMArk } from "./components/copyRight";
 import { QueryResults } from "./components/queryResults";
+import { Typography } from "@mui/material";
 
 function App() {
   return (
     <div>
       {/* <header className="App-header"> */}
-      <div
-        style={{
-          textTransform: "uppercase",
-          textAlign: "center",
-          fontSize: "36px",
-        }}
-      >
+      <div>
         <h2>
-          Neural Code Search Engine
+          <Typography
+            color={"primary"}
+            style={{
+              textTransform: "uppercase",
+              textAlign: "center",
+              fontSize: "48px",
+            }}
+          >
+            <b>Neural Code Search Engine</b>
+          </Typography>
           <h2
             style={{
               textTransform: "uppercase",

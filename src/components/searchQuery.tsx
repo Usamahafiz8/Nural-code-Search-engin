@@ -258,7 +258,7 @@ export const QuerySearch: React.FC = () => {
               style={{
                 width: "100%",
                 display: "flex",
-                flexDirection: "row",
+                flexDirection:"row-reverse",
                 flexWrap: "wrap",
                 gap: "4px",
               }}
@@ -286,7 +286,7 @@ export const QuerySearch: React.FC = () => {
       {/* show matching strings, URL, and code */}
       {code.length > 0 && ( // Check if code array is not empty
         <div>
-          <b style={{fontSize:"28px"}}>Searched Results:</b>
+          <b style={{fontSize:"28px"}}>Search Results:</b>
           {suggestions.map((matchingString, index) => (
             <div key={index}>
               <br />
