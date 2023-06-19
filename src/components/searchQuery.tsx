@@ -121,16 +121,12 @@
 //   );
 // };
 
-
-
-
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete, {
   AutocompleteInputChangeReason,
 } from "@mui/material/Autocomplete";
 import { top100Films } from "../content/seachResultRelated";
-
 
 export const QuerySearch: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
@@ -153,7 +149,7 @@ export const QuerySearch: React.FC = () => {
   //     } else {
   //       setCode("");
   //     }
-  
+
   //     setPreviousSearches((prevSearches) => [...prevSearches, value]);
   //   } else {
   //     setCode(null);
@@ -181,64 +177,45 @@ export const QuerySearch: React.FC = () => {
     }
   };
 
-  
-// const handleInputChange = (
-//   event: React.SyntheticEvent<Element, Event>,
-//   value: string,
-//   reason: AutocompleteInputChangeReason
-// ) => {
-//   const input = value.toLowerCase();
-//   const filteredResults = top100Films.filter((film) =>
-//     film.docstring.toLowerCase().includes(input)
-//   );
-//   const matchingStrings = filteredResults.map((film) => film.docstring);
-//   const matchingCode = filteredResults.map((film) => film.code);
-//   setSuggestions(matchingStrings);
-//   setCode(matchingCode.join("\n")); // Combine relevant code into a single string
-// };
-const handleInputChange = (
-  event: React.SyntheticEvent<Element, Event>,
-  value: string,
-  reason: AutocompleteInputChangeReason
-) => {
-  const input = value.toLowerCase();
-  const filteredResults = top100Films.filter((film) =>
-    film.docstring.toLowerCase().includes(input)
-  );
-  const matchingStrings = filteredResults.map((film) => film.docstring);
-  const matchingCodes = filteredResults.map((film) => film.code);
-  setSuggestions(matchingStrings);
-  setCode(matchingCodes); // Update code state with the array of codes
-};
-
-
-// setting a log of the json file 
-const [data, setData] = useState<any[]>([]);
-
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await fetch("bscs-2019-2023\src\content\test1.jsonl");
-      const content = await response.text();
-      const lines = content.split("\n");
-      const dataArray = lines.map((line) => {
-        const jsonData = JSON.parse(line);
-        console.log(jsonData, 'file'); // Log the parsed JSON object
-        return jsonData;
-      });
-      setData(dataArray);
-    } catch (error) {
-      console.error("Error fetching JSONL file:", error);
-    }
+  const handleInputChange = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: string,
+    reason: AutocompleteInputChangeReason
+  ) => {
+    const input = value.toLowerCase();
+    const filteredResults = top100Films.filter((film) =>
+      film.docstring.toLowerCase().includes(input)
+    );
+    const matchingStrings = filteredResults.map((film) => film.docstring);
+    const matchingCodes = filteredResults.map((film) => film.code);
+    setSuggestions(matchingStrings);
+    setCode(matchingCodes); // Update code state with the array of codes
   };
-const test = "bscs-2019-2023\src\content\test1.jsonl"
-  console.log('----',  test);
-  
-  fetchData();
-}, []);
 
+  // setting a log of the json file
+  const [data, setData] = useState<any[]>([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("bscs-2019-2023srccontent\test1.jsonl");
+        const content = await response.text();
+        const lines = content.split("\n");
+        const dataArray = lines.map((line) => {
+          const jsonData = JSON.parse(line);
+          console.log(jsonData, "file"); // Log the parsed JSON object
+          return jsonData;
+        });
+        setData(dataArray);
+      } catch (error) {
+        console.error("Error fetching JSONL file:", error);
+      }
+    };
+    const test = "bscs-2019-2023srccontent\test1.jsonl";
+    console.log("----", test);
 
+    fetchData();
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -304,26 +281,6 @@ const test = "bscs-2019-2023\src\content\test1.jsonl"
           </>
         )}
       </div>
-   {/* show matching strings, URL, and code */}
-   {code.length > 0 && ( // Check if code array is not empty
-        <div>
-          <b>Matching Strings, URL, and Code:</b>
-          {suggestions.map((matchingString, index) => (
-            <div key={index}>
-              <p>{matchingString}</p>
-              <a href={top100Films[index].url}>{top100Films[index].url}</a>
-              <br />
-              <br />
-              <div style={{ border: "1px solid red" }}>
-                <pre>{code[index]}</pre>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-      {/* ... */}
-
       {/* show matching strings, URL, and code */}
       {code.length > 0 && ( // Check if code array is not empty
         <div>
@@ -342,7 +299,5 @@ const test = "bscs-2019-2023\src\content\test1.jsonl"
         </div>
       )}
     </div>
-    </div>
-      
   );
 };

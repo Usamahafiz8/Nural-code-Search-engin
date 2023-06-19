@@ -12,6 +12,7 @@ export const CopyRightMArk = () => {
         alignItems: 'center',
         justifyContent: "center",
         gap: "8px",
+        margin:""
       }}
     >
       <div>

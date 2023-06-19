@@ -5,19 +5,29 @@ import { QueryResults } from "./components/queryResults";
 
 function App() {
   return (
-    <div >
+    <div>
       {/* <header className="App-header"> */}
-        <h2 style={{ textTransform: "uppercase" , textAlign:"center", fontSize:"36px"}}>
-          Neural Code Search Engine Using pre-trained model
+      <h2
+        style={{
+          textTransform: "uppercase",
+          textAlign: "center",
+          fontSize: "34px",
+        }}
+      >
+        Neural Code Search Engine
+      <h2
+        style={{
+          textTransform: "uppercase",
+          textAlign: "center",
+          fontSize: "28px",
+        }}
+        >
+        Using pre-trained model
         </h2>
-      <br />
-      <br />
+      </h2>
       <div style={{ padding: "20px" }}>
         <QueryResults />
       </div>
-      {/* <footer className="App-footer">
-        <CopyRightMArk />
-      </footer> */}
     </div>
   );
 }
