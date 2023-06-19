@@ -1,126 +1,3 @@
-// import React, { useState } from "react";
-// import TextField from "@mui/material/TextField";
-// import Autocomplete, {
-//   AutocompleteInputChangeReason,
-// } from "@mui/material/Autocomplete";
-// import { top100Films } from "../content/seachResultRelated";
-
-// export const QuerySearch: React.FC = () => {
-//   const [selectedItem, setSelectedItem] = useState<string | null>(null);
-//   const [code, setCode] = useState<string | undefined>(undefined);
-//   const [suggestions, setSuggestions] = useState<string[]>([]);
-//   const [previousSearches, setPreviousSearches] = useState<string[]>([]);
-
-//   console.log(suggestions);
-
-//   const handleSelectionChange = (
-//     event: React.ChangeEvent<{}>,
-//     value: string | null
-//   ) => {
-//     setSelectedItem(value);
-//     if (value) {
-//       const selectedFilm = top100Films.find((film : any) => film.docstring === value);
-//       if (selectedFilm) {
-//         setCode(selectedFilm.code);
-//       } else {
-//         setCode("");
-//       }
-
-//       setPreviousSearches((prevSearches) => [...prevSearches, value]);
-//     } else {
-//       setCode(undefined);
-//     }
-//   };
-
-//   const handleInputChange = (
-//     event: React.SyntheticEvent<Element, Event>,
-//     value: string,
-//     reason: AutocompleteInputChangeReason
-//   ) => {
-//     const input = value.toLowerCase();
-//     const filteredSuggestions: any= top100Films
-//       .map((option: any) => option.docstring)
-//       .filter((docstring) => docstring && docstring.toLowerCase().includes(input));
-//     setSuggestions(filteredSuggestions);
-//   };
-
-//   return (
-//     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-//       {/* search area */}
-//       <div
-//         style={{
-//           display: "flex",
-//           flexDirection: "column",
-//           justifyContent: "center",
-//           alignItems: "center",
-//         }}
-//       >
-//         <div style={{ width: "50%" }}>
-//           <Autocomplete
-//             freeSolo
-//             id="free-solo-2-demo"
-//             disableClearable
-//             options={suggestions}
-//             onChange={handleSelectionChange}
-//             onInputChange={handleInputChange}
-//             renderInput={(params) => (
-//               <TextField
-//                 {...params}
-//                 label="Search your Query"
-//                 InputProps={{
-//                   ...params.InputProps,
-//                   type: "search",
-//                 }}
-//               />
-//             )}
-//           />
-//         </div>
-//       </div>
-//       {/* show previous searches */}
-//       <div>
-//         {selectedItem && (
-//           <>
-//             <b>History</b>
-//             <div
-//               style={{
-//                 width: "100%",
-//                 display: "flex",
-//                 flexDirection: "row",
-//                 flexWrap: "wrap",
-//                 gap: "4px",
-//               }}
-//             >
-//               {previousSearches.map((search, index) => (
-//                 <p
-//                   key={index}
-//                   style={{
-//                     backgroundColor: "lightgreen",
-//                     borderRadius: "16px",
-//                     padding: 8,
-//                     color: "green",
-//                     margin: 3,
-//                   }}
-//                 >
-//                   {search}
-//                 </p>
-//               ))}
-//             </div>
-//           </>
-//         )}
-//       </div>
-//       {/* show related code */}
-//       <div>
-//         {code && (
-//           <>
-//             <b>Code:</b>
-//             <pre>{code}</pre>
-//           </>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete, {
@@ -135,27 +12,6 @@ export const QuerySearch: React.FC = () => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [previousSearches, setPreviousSearches] = useState<string[]>([]);
 
-  console.log(suggestions);
-
-  // const handleSelectionChange = (
-  //   event: React.ChangeEvent<{}>,
-  //   value: string | null
-  // ) => {
-  //   setSelectedItem(value);
-  //   if (value) {
-  //     const selectedFilms = top100Films.filter((film) => film.docstring === value);
-  //     if (selectedFilms.length > 0) {
-  //       const selectedCodes = selectedFilms.map((film) => film.code);
-  //       // setCode(selectedCodes.join("\n")); // Combine relevant code into a single paragraph
-  //     } else {
-  //       setCode("");
-  //     }
-
-  //     setPreviousSearches((prevSearches) => [...prevSearches, value]);
-  //   } else {
-  //     setCode(null);
-  //   }
-  // };
   const handleSelectionChange = (
     event: React.ChangeEvent<{}>,
     value: string | null
@@ -172,7 +28,7 @@ export const QuerySearch: React.FC = () => {
         setCode([]);
       }
 
-      setPreviousSearches((prevSearches) => [...prevSearches, value]);
+      setPreviousSearches((prevSearches) => [value]);
     } else {
       setCode([]);
     }
@@ -226,35 +82,29 @@ export const QuerySearch: React.FC = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap: "8px",
-        }}
-      >
-        <h2>
-          <Typography
-            color={"#091E3E"}
-            style={{
-              textTransform: "uppercase",
-              textAlign: "center",
-              fontSize: "48px",
-            }}
-          >
-            <b>Neural Code Search Engine</b>
-          </Typography>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        
           <h2
             style={{
               textTransform: "uppercase",
               textAlign: "center",
               fontSize: "28px",
+            display:"flex",
+            flexDirection:"column"
             }}
           >
+            <b
+              style={{
+                color: "#091E3E",
+                textTransform: "uppercase",
+                textAlign: "center",
+                fontSize: "48px",
+              }}
+            >
+              Neural Code Search Engine
+            </b>
             Using pre-trained model
           </h2>
-        </h2>
       </div>
       {/* search area */}
       <div
@@ -286,38 +136,6 @@ export const QuerySearch: React.FC = () => {
           />
         </div>
       </div>
-      {/* show previous search */}
-      {/* <div>
-        {selectedItem && (
-          <>
-           <b style={{fontSize:"28px"}}>History</b>
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection:"row",
-                flexWrap: "wrap",
-                gap: "4px",
-              }}
-            >
-              {previousSearches.map((search, index) => (
-                <p
-                  key={index}
-                  style={{
-                    backgroundColor: "lightgreen",
-                    borderRadius: "16px",
-                    padding: 8,
-                    color: "green",
-                    margin: 3,
-                  }}
-                >
-                  {search},
-                </p>
-              ))}
-            </div>
-          </>
-        )}
-      </div> */}
 
       {/* show matching strings, URL, and code */}
       <br />
@@ -326,8 +144,8 @@ export const QuerySearch: React.FC = () => {
       <br />
       {code.length > 0 && ( // Check if code array is not empty
         <div>
-          <b style={{ fontSize: "24px", }}>
-            Search Results For :
+          <b style={{ fontSize: "24px" }}>
+            Search Results For : {previousSearches}
           </b>
           {suggestions.map((matchingString, index) => (
             <div key={index}>
