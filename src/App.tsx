@@ -7,27 +7,25 @@ function App() {
   return (
     <div>
       {/* <header className="App-header"> */}
-      <div 
+      <div
         style={{
           textTransform: "uppercase",
           textAlign: "center",
-          fontSize: "48px",
+          fontSize: "36px",
         }}
       >
-      <h2
-      >
-        Neural Code Search Engine
-      <h2
-        style={{
-          textTransform: "uppercase",
-          textAlign: "center",
-          fontSize: "28px",
-        }}
-        >
-        Using pre-trained model
+        <h2>
+          Neural Code Search Engine
+          <h2
+            style={{
+              textTransform: "uppercase",
+              textAlign: "center",
+              fontSize: "28px",
+            }}
+          >
+            Using pre-trained model
+          </h2>
         </h2>
-      </h2>
-
       </div>
       <div style={{ padding: "20px" }}>
         <QueryResults />

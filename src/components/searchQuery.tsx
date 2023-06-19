@@ -218,7 +218,7 @@ export const QuerySearch: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
       {/* search area */}
       <div
         style={{
@@ -253,7 +253,7 @@ export const QuerySearch: React.FC = () => {
       <div>
         {selectedItem && (
           <>
-            <b>History</b>
+           <b style={{fontSize:"28px"}}>History</b>
             <div
               style={{
                 width: "100%",
@@ -281,18 +281,25 @@ export const QuerySearch: React.FC = () => {
           </>
         )}
       </div>
+
+
       {/* show matching strings, URL, and code */}
       {code.length > 0 && ( // Check if code array is not empty
         <div>
-          <b>Matching Strings, URL, and Code:</b>
+          <b style={{fontSize:"28px"}}>Searched Results:</b>
           {suggestions.map((matchingString, index) => (
             <div key={index}>
-              <p>{matchingString}</p>
-              <a href={top100Films[index].url}>{top100Films[index].url}</a>
               <br />
-              <br />
-              <div style={{ border: "1px solid red" }}>
+              <div style={{ border: "1px solid green", padding: '16px', borderRadius:"16px" }}>
+              <b style={{fontSize:"16px"}}>
+              <b>{matchingString}</b>
+                </b>
                 <pre>{code[index]}</pre>
+              <br />
+              <b>
+
+              <a href={top100Films[index].url}>{top100Films[index].url}</a>
+              </b>
               </div>
             </div>
           ))}
