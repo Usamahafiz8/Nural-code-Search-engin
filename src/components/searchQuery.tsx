@@ -127,6 +127,7 @@ import Autocomplete, {
   AutocompleteInputChangeReason,
 } from "@mui/material/Autocomplete";
 import { top100Films } from "../content/seachResultRelated";
+import Typography from "@mui/material/Typography";
 
 export const QuerySearch: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
@@ -188,7 +189,7 @@ export const QuerySearch: React.FC = () => {
       setCode([]);
       return;
     }
-  
+
     const filteredResults = top100Films.filter((film) =>
       film.docstring.toLowerCase().includes(input)
     );
@@ -197,7 +198,7 @@ export const QuerySearch: React.FC = () => {
     setSuggestions(matchingStrings);
     setCode(matchingCodes);
   };
-  
+
   // setting a log of the json file
   const [data, setData] = useState<any[]>([]);
 
@@ -225,6 +226,36 @@ export const QuerySearch: React.FC = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: "8px",
+        }}
+      >
+        <h2>
+          <Typography
+            color={"#091E3E"}
+            style={{
+              textTransform: "uppercase",
+              textAlign: "center",
+              fontSize: "48px",
+            }}
+          >
+            <b>Neural Code Search Engine</b>
+          </Typography>
+          <h2
+            style={{
+              textTransform: "uppercase",
+              textAlign: "center",
+              fontSize: "28px",
+            }}
+          >
+            Using pre-trained model
+          </h2>
+        </h2>
+      </div>
       {/* search area */}
       <div
         style={{
@@ -288,24 +319,34 @@ export const QuerySearch: React.FC = () => {
         )}
       </div> */}
 
-
       {/* show matching strings, URL, and code */}
+      <br />
+      <br />
+      <br />
+      <br />
       {code.length > 0 && ( // Check if code array is not empty
         <div>
-          <b style={{fontSize:"28px",    textTransform: "uppercase",}}>Search Results  For :</b>
+          <b style={{ fontSize: "24px", }}>
+            Search Results For :
+          </b>
           {suggestions.map((matchingString, index) => (
             <div key={index}>
               <br />
-              <div style={{ border: "2px solid blue", padding: '16px', borderRadius:"16px" }}>
-              <b style={{fontSize:"16px"}}>
-              <b>{matchingString}</b>
+              <div
+                style={{
+                  border: "2px solid green",
+                  padding: "16px",
+                  borderRadius: "16px",
+                }}
+              >
+                <b style={{ fontSize: "16px" }}>
+                  <b>{matchingString}</b>
                 </b>
                 <pre>{code[index]}</pre>
-              <br />
-              <b>
-
-              <a href={top100Films[index].url}>{top100Films[index].url}</a>
-              </b>
+                <br />
+                <b>
+                  <a href={top100Films[index].url}>{top100Films[index].url}</a>
+                </b>
               </div>
             </div>
           ))}
