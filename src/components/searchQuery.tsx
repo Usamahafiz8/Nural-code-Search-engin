@@ -134,44 +134,82 @@ import { top100Films } from "../content/seachResultRelated";
 
 export const QuerySearch: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
-  const [code, setCode] = useState<string | null>(null);
+  const [code, setCode] = useState<string[]>([]); // Changed to string[]
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [previousSearches, setPreviousSearches] = useState<string[]>([]);
 
   console.log(suggestions);
 
+  // const handleSelectionChange = (
+  //   event: React.ChangeEvent<{}>,
+  //   value: string | null
+  // ) => {
+  //   setSelectedItem(value);
+  //   if (value) {
+  //     const selectedFilms = top100Films.filter((film) => film.docstring === value);
+  //     if (selectedFilms.length > 0) {
+  //       const selectedCodes = selectedFilms.map((film) => film.code);
+  //       // setCode(selectedCodes.join("\n")); // Combine relevant code into a single paragraph
+  //     } else {
+  //       setCode("");
+  //     }
+  
+  //     setPreviousSearches((prevSearches) => [...prevSearches, value]);
+  //   } else {
+  //     setCode(null);
+  //   }
+  // };
   const handleSelectionChange = (
     event: React.ChangeEvent<{}>,
     value: string | null
   ) => {
     setSelectedItem(value);
     if (value) {
-      const selectedFilm = top100Films.find((film:any) => film.docstring === value);
-      if (selectedFilm) {
-        setCode(selectedFilm.code);
+      const selectedFilms = top100Films.filter(
+        (film) => film.docstring === value
+      );
+      if (selectedFilms.length > 0) {
+        const selectedCodes = selectedFilms.map((film) => film.code);
+        setCode(selectedCodes); // Update code state with an array of codes
       } else {
-        setCode("");
+        setCode([]);
       }
 
       setPreviousSearches((prevSearches) => [...prevSearches, value]);
+    } else {
+      setCode([]);
     }
   };
 
-  const handleInputChange = (
-    event: React.SyntheticEvent<Element, Event>,
-    value: string,
-    reason: AutocompleteInputChangeReason
-  ) => {
-    const input = value.toLowerCase();
-    const filteredResults = top100Films.filter((film:any) =>
-      film.docstring.toLowerCase().includes(input)
-    );
-    const matchingStrings = filteredResults.map((film:any) => film.docstring);
-    const matchingCode = filteredResults.map((film:any) => film.code);
-    setSuggestions(matchingStrings);
-    setCode(matchingCode.join("\n")); // Combine relevant code into a single paragraph
-  };
-
+  
+// const handleInputChange = (
+//   event: React.SyntheticEvent<Element, Event>,
+//   value: string,
+//   reason: AutocompleteInputChangeReason
+// ) => {
+//   const input = value.toLowerCase();
+//   const filteredResults = top100Films.filter((film) =>
+//     film.docstring.toLowerCase().includes(input)
+//   );
+//   const matchingStrings = filteredResults.map((film) => film.docstring);
+//   const matchingCode = filteredResults.map((film) => film.code);
+//   setSuggestions(matchingStrings);
+//   setCode(matchingCode.join("\n")); // Combine relevant code into a single string
+// };
+const handleInputChange = (
+  event: React.SyntheticEvent<Element, Event>,
+  value: string,
+  reason: AutocompleteInputChangeReason
+) => {
+  const input = value.toLowerCase();
+  const filteredResults = top100Films.filter((film) =>
+    film.docstring.toLowerCase().includes(input)
+  );
+  const matchingStrings = filteredResults.map((film) => film.docstring);
+  const matchingCodes = filteredResults.map((film) => film.code);
+  setSuggestions(matchingStrings);
+  setCode(matchingCodes); // Update code state with the array of codes
+};
 
 
 // setting a log of the json file 
@@ -266,20 +304,45 @@ const test = "bscs-2019-2023\src\content\test1.jsonl"
           </>
         )}
       </div>
-
-      {/* show matching strings, URL, and code */}
-      {code && (
+   {/* show matching strings, URL, and code */}
+   {code.length > 0 && ( // Check if code array is not empty
         <div>
           <b>Matching Strings, URL, and Code:</b>
           {suggestions.map((matchingString, index) => (
             <div key={index}>
               <p>{matchingString}</p>
-              {/* <a href={top100Films[index].url}>{top100Films[index].url}</a> */}
-              <pre>{code[index]}</pre>
+              <a href={top100Films[index].url}>{top100Films[index].url}</a>
+              <br />
+              <br />
+              <div style={{ border: "1px solid red" }}>
+                <pre>{code[index]}</pre>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      {/* ... */}
+
+      {/* show matching strings, URL, and code */}
+      {code.length > 0 && ( // Check if code array is not empty
+        <div>
+          <b>Matching Strings, URL, and Code:</b>
+          {suggestions.map((matchingString, index) => (
+            <div key={index}>
+              <p>{matchingString}</p>
+              <a href={top100Films[index].url}>{top100Films[index].url}</a>
+              <br />
+              <br />
+              <div style={{ border: "1px solid red" }}>
+                <pre>{code[index]}</pre>
+              </div>
             </div>
           ))}
         </div>
       )}
     </div>
+    </div>
+      
   );
 };
