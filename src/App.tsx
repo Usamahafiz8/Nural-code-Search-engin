@@ -7,12 +7,14 @@ function App() {
   return (
     <div>
       {/* <header className="App-header"> */}
-      <h2
+      <div 
         style={{
           textTransform: "uppercase",
           textAlign: "center",
-          fontSize: "34px",
+          fontSize: "48px",
         }}
+      >
+      <h2
       >
         Neural Code Search Engine
       <h2
@@ -25,6 +27,8 @@ function App() {
         Using pre-trained model
         </h2>
       </h2>
+
+      </div>
       <div style={{ padding: "20px" }}>
         <QueryResults />
       </div>
