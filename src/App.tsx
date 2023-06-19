@@ -8,15 +8,16 @@ function App() {
     <div >
       {/* <header className="App-header"> */}
         <h2 style={{ textTransform: "uppercase" , textAlign:"center", fontSize:"36px"}}>
-          Nural Code Search Engin
+          Neural Code Search Engine Using pre-trained model
         </h2>
-      {/* </header> */}
+      <br />
+      <br />
       <div style={{ padding: "20px" }}>
         <QueryResults />
       </div>
-      <footer className="App-footer">
+      {/* <footer className="App-footer">
         <CopyRightMArk />
-      </footer>
+      </footer> */}
     </div>
   );
 }

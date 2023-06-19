@@ -4,11 +4,12 @@ export const CopyRightMArk = () => {
   return (
     <div
       style={{
-        // backgroundColor: '#fffffff',
+        backgroundColor: 'blue',
         color:'white',
         padding: "8px",
         display: "flex",
         flexDirection: "column",
+        alignItems: 'center',
         justifyContent: "center",
         gap: "8px",
       }}
