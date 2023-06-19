@@ -7,11 +7,11 @@ import { Typography } from "@mui/material";
 function App() {
   return (
     <div>
-      {/* <header className="App-header"> */}
+      
       <div>
         <h2>
           <Typography
-            color={"primary"}
+            color={"#091E3E"}
             style={{
               textTransform: "uppercase",
               textAlign: "center",

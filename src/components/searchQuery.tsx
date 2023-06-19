@@ -176,22 +176,28 @@ export const QuerySearch: React.FC = () => {
       setCode([]);
     }
   };
-
   const handleInputChange = (
     event: React.SyntheticEvent<Element, Event>,
     value: string,
     reason: AutocompleteInputChangeReason
   ) => {
-    const input = value.toLowerCase();
+    const input = value.trim().toLowerCase(); // Trim whitespace and convert to lowercase
+    if (input === "") {
+      // If input is empty, clear the suggestions and code state
+      setSuggestions([]);
+      setCode([]);
+      return;
+    }
+  
     const filteredResults = top100Films.filter((film) =>
       film.docstring.toLowerCase().includes(input)
     );
     const matchingStrings = filteredResults.map((film) => film.docstring);
     const matchingCodes = filteredResults.map((film) => film.code);
     setSuggestions(matchingStrings);
-    setCode(matchingCodes); // Update code state with the array of codes
+    setCode(matchingCodes);
   };
-
+  
   // setting a log of the json file
   const [data, setData] = useState<any[]>([]);
 
@@ -250,7 +256,7 @@ export const QuerySearch: React.FC = () => {
         </div>
       </div>
       {/* show previous search */}
-      <div>
+      {/* <div>
         {selectedItem && (
           <>
            <b style={{fontSize:"28px"}}>History</b>
@@ -258,7 +264,7 @@ export const QuerySearch: React.FC = () => {
               style={{
                 width: "100%",
                 display: "flex",
-                flexDirection:"row-reverse",
+                flexDirection:"row",
                 flexWrap: "wrap",
                 gap: "4px",
               }}
@@ -280,17 +286,17 @@ export const QuerySearch: React.FC = () => {
             </div>
           </>
         )}
-      </div>
+      </div> */}
 
 
       {/* show matching strings, URL, and code */}
       {code.length > 0 && ( // Check if code array is not empty
         <div>
-          <b style={{fontSize:"28px"}}>Search Results:</b>
+          <b style={{fontSize:"28px",    textTransform: "uppercase",}}>Search Results  For :</b>
           {suggestions.map((matchingString, index) => (
             <div key={index}>
               <br />
-              <div style={{ border: "1px solid green", padding: '16px', borderRadius:"16px" }}>
+              <div style={{ border: "2px solid blue", padding: '16px', borderRadius:"16px" }}>
               <b style={{fontSize:"16px"}}>
               <b>{matchingString}</b>
                 </b>
