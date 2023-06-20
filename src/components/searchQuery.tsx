@@ -163,7 +163,9 @@ export const QuerySearch: React.FC = () => {
                 <pre>{code[index]}</pre>
                 <br />
                 <b>
-                  <a href={top100Films[index].url}>{top100Films[index].url}</a>
+                  {/* <a href={top100Films[index].url}>{top100Films[index].url}</a> */}
+                  <a href={top100Films[index].url} target="_blank">{top100Films[index].url}</a>
+
                 </b>
               </div>
             </div>
